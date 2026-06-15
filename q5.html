@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assessment - Question 5</title>
+
+<link rel="stylesheet" href="css/assessment.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="assessment-card">
+
+<img src="assets/logo.png" class="logo" alt="Reckitt Logo">
+
+<h1 class="title">Assessment</h1>
+
+<div class="progress-section">
+    <div class="progress-bar">
+        <div class="progress-fill" style="width:100%;"></div>
+    </div>
+    <span class="progress-text">5/5</span>
+</div>
+
+<div class="question-box">
+    What should you do if you notice an unsafe condition?
+</div>
+
+<div class="options-grid">
+
+<button class="option" data-correct="false">
+    <span class="option-text">Ignore it</span>
+</button>
+
+<button class="option" data-correct="true">
+    <span class="option-text">Report it immediately</span>
+</button>
+
+<button class="option" data-correct="false">
+    <span class="option-text">Wait for someone else</span>
+</button>
+
+<button class="option" data-correct="false">
+    <span class="option-text">Leave without informing anyone</span>
+</button>
+
+</div>
+
+<div class="button-row">
+
+<button class="prev-btn" onclick="location.href='q4.html'">
+    Previous
+</button>
+
+<button class="next-btn" id="finishBtn" disabled>
+    Finish
+</button>
+
+</div>
+
+<img src="assets/watermark.png" class="watermark" alt="">
+
+</div>
+
+<script>
+const options = document.querySelectorAll(".option");
+const nextBtn = document.getElementById("finishBtn");
+
+let attempts = 0;
+let answered = false;
+
+options.forEach(option => {
+
+    option.addEventListener("click", () => {
+
+        if (answered) return;
+
+        const isCorrect = option.dataset.correct === "true";
+
+        attempts++;
+
+        // CORRECT ANSWER
+        if (isCorrect) {
+
+            option.classList.add("correct");
+
+            // Give point only if correct on first attempt
+            if (attempts === 1) {
+                localStorage.setItem("q5Score", "1");
+            } else {
+                localStorage.setItem("q5Score", "0");
+            }
+
+            answered = true;
+            nextBtn.disabled = false;
+        }
+
+        // WRONG ANSWER
+        else {
+
+            option.classList.add("wrong");
+
+            // First wrong attempt
+            if (attempts === 1) {
+
+                // Remove red mark after a short delay
+                setTimeout(() => {
+                    option.classList.remove("wrong");
+                }, 800);
+
+            }
+
+            // Second wrong attempt
+            else {
+
+                // Show correct answer
+                options.forEach(opt => {
+                    if (opt.dataset.correct === "true") {
+                        opt.classList.add("correct");
+                    }
+                });
+
+                localStorage.setItem("q5Score", "0");
+
+                answered = true;
+                nextBtn.disabled = false;
+            }
+        }
+
+    });
+
+});
+
+nextBtn.addEventListener("click", () => {
+    window.location.href = "result.html";
+});
+</script>
+
+</body>
+</html>

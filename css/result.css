@@ -1,0 +1,165 @@
+/* result.css */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Montserrat',sans-serif;
+}
+
+body{
+    background:#d3d3d3;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.result-card{
+    width:750px;
+    height:760px;
+    background:#FFF2F8;
+    position:relative;
+    overflow:hidden;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.confetti{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:0;
+}
+
+.logo{
+    width:253px;
+    margin-top:140px;
+    z-index:1;
+}
+
+.result-title{
+    margin-top:40px;
+    font-size:36px;
+    font-weight:500;
+    color:#EA3FB8;
+    text-transform:uppercase;
+    z-index:1;
+}
+
+.score-heading{
+    margin-top:20px;
+    font-size:50px;
+    font-weight:500;
+    color:#3F1536;
+    z-index:1;
+}
+
+.score-value{
+    margin-top:10px;
+    font-size:74px !important;
+    font-weight:700 !important;
+    color:#009951 !important;
+    line-height:1;
+    z-index:1;
+}
+.pass-score{
+    color:#009951 !important;
+}
+
+.fail-score{
+    color:#FF0000 !important;
+}
+
+.result-message{
+    margin-top:20px;
+    text-align:center;
+    font-size:30px;
+    line-height:44px;
+    color:#444;
+    width:500px;
+    z-index:1;
+}
+
+.result-btn{
+    margin-top:45px;
+    width:311px;
+    height:66px;
+    border:none;
+    border-radius:10px;
+    background:#FF008A;
+    color:#fff;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    z-index:1;
+}
+
+.watermark{
+    position:absolute;
+    bottom:0;
+    left:-14px;
+    width:136px;
+    opacity:.06;
+}
+@media (max-width: 768px){
+
+    body{
+        padding:0;
+        background:#FFF2F8;
+    }
+
+    .assessment-card,
+    .result-card,
+    .pass-card,
+    .video-card,
+    .card{
+        width:100%;
+        min-height:100vh;
+        height:auto;
+        border-radius:0;
+    }
+
+    .logo{
+        width:180px;
+    }
+
+}
+@media (max-width:768px){
+
+    .result-card{
+        width:100%;
+        min-height:100vh;
+    }
+
+    .logo{
+        width:180px;
+        margin-top:80px;
+    }
+
+    .result-title{
+        font-size:28px;
+    }
+
+    .score-heading{
+        font-size:32px;
+    }
+
+    .score-value{
+        font-size:56px !important;
+    }
+
+    .result-message{
+        width:90%;
+        font-size:20px;
+        line-height:1.5;
+    }
+
+    .result-btn{
+        width:90%;
+    }
+}

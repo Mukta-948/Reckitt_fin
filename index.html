@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>RECKITT</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +11,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .error{
+            color:red;
+            font-size:12px;
+            display:block;
+            margin-top:4px;
+            min-height:16px;
+        }
+
+        input.invalid{
+            border:1px solid red;
+        }
+
+        input.valid{
+            border:1px solid #28a745;
+        }
+
+        button:disabled{
+            opacity:0.5;
+            cursor:not-allowed;
+        }
+    </style>
 </head>
 
 <body>
@@ -30,29 +52,33 @@
                 Your safety is our responsibility.
             </p>
 
-            <form>
+            <form id="registrationForm">
 
                 <div class="form-group">
                     <label>Name</label>
-                    <input type="text" placeholder="Enter name">
+                    <input type="text" id="name" placeholder="Enter Name">
+                    <small class="error" id="nameError"></small>
                 </div>
 
                 <div class="form-group">
                     <label>Designation</label>
-                    <input type="text" placeholder="Enter Designation">
+                    <input type="text" id="designation" placeholder="Enter Designation">
+                    <small class="error" id="designationError"></small>
                 </div>
 
                 <div class="form-group">
                     <label>Mobile No.</label>
-                    <input type="text" placeholder="Enter Mobile No.">
+                    <input type="text" id="mobile" placeholder="Enter Mobile No." maxlength="10">
+                    <small class="error" id="mobileError"></small>
                 </div>
 
                 <div class="form-group">
                     <label>Email Id</label>
-                    <input type="email" placeholder="Enter Email Id">
+                    <input type="email" id="email" placeholder="Enter Email Id">
+                    <small class="error" id="emailError"></small>
                 </div>
 
-                <button type="submit">
+                <button type="submit" id="submitBtn" disabled>
                     Submit
                 </button>
 
@@ -61,6 +87,147 @@
         </div>
 
     </div>
+
+<script>
+
+const form = document.getElementById("registrationForm");
+
+const nameInput = document.getElementById("name");
+const designationInput = document.getElementById("designation");
+const mobileInput = document.getElementById("mobile");
+const emailInput = document.getElementById("email");
+const submitBtn = document.getElementById("submitBtn");
+
+function validateForm() {
+
+    const nameValid = nameInput.value.trim().length >= 3;
+
+    const designationValid =
+        designationInput.value.trim() !== "";
+
+    const mobileValid =
+        /^[0-9]{10}$/.test(mobileInput.value);
+
+    const emailValid =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
+
+    submitBtn.disabled =
+        !(nameValid &&
+          designationValid &&
+          mobileValid &&
+          emailValid);
+}
+
+
+// NAME VALIDATION
+nameInput.addEventListener("input", function() {
+
+    this.value = this.value.replace(/[^A-Za-z ]/g, "");
+
+    if (this.value.length < 3) {
+        document.getElementById("nameError").innerText =
+            "Enter at least 3 characters";
+        this.classList.add("invalid");
+        this.classList.remove("valid");
+    } else {
+        document.getElementById("nameError").innerText = "";
+        this.classList.remove("invalid");
+        this.classList.add("valid");
+    }
+
+    validateForm();
+});
+
+
+// DESIGNATION VALIDATION
+designationInput.addEventListener("input", function() {
+
+    if (this.value.trim() === "") {
+        document.getElementById("designationError").innerText =
+            "Required field";
+        this.classList.add("invalid");
+        this.classList.remove("valid");
+    } else {
+        document.getElementById("designationError").innerText = "";
+        this.classList.remove("invalid");
+        this.classList.add("valid");
+    }
+
+    validateForm();
+});
+
+
+// MOBILE VALIDATION
+mobileInput.addEventListener("input", function() {
+
+    this.value = this.value.replace(/\D/g, "");
+
+    if (this.value.length !== 10) {
+        document.getElementById("mobileError").innerText =
+            "Enter 10 digits";
+        this.classList.add("invalid");
+        this.classList.remove("valid");
+    } else {
+        document.getElementById("mobileError").innerText = "";
+        this.classList.remove("invalid");
+        this.classList.add("valid");
+    }
+
+    validateForm();
+});
+
+
+// EMAIL VALIDATION
+emailInput.addEventListener("input", function() {
+
+    const emailPattern =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(this.value)) {
+        document.getElementById("emailError").innerText =
+            "Enter valid email";
+        this.classList.add("invalid");
+        this.classList.remove("valid");
+    } else {
+        document.getElementById("emailError").innerText = "";
+        this.classList.remove("invalid");
+        this.classList.add("valid");
+    }
+
+    validateForm();
+});
+
+
+// FORM SUBMIT
+form.addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    localStorage.setItem(
+        "visitorName",
+        nameInput.value.trim()
+    );
+
+    localStorage.setItem(
+        "visitorDesignation",
+        designationInput.value.trim()
+    );
+
+    localStorage.setItem(
+        "visitorMobile",
+        mobileInput.value.trim()
+    );
+
+    localStorage.setItem(
+        "visitorEmail",
+        emailInput.value.trim()
+    );
+
+    window.location.href = "video.html";
+
+});
+
+</script>
 
 </body>
 </html>

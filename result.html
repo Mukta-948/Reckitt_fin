@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment Result</title>
+
+    <link rel="stylesheet" href="css/result.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="assessment-card result-card">
+
+    <img src="assets/confetti.png" class="confetti" alt="">
+
+    <img src="assets/logo.png" alt="Reckitt Logo" class="logo result-logo">
+
+    <h2 class="result-title" id="resultTitle">
+        GREAT WORK
+    </h2>
+
+    <h1 class="score-heading">
+        You've scored
+    </h1>
+
+    <div class="score-value" id="scoreValue">
+        0%
+    </div>
+
+    <p class="result-message" id="resultMessage">
+        Loading...
+    </p>
+
+    <button class="result-btn" id="resultBtn">
+        Continue
+    </button>
+
+    <img src="assets/watermark.png" class="watermark" alt="">
+
+</div>
+
+<script>
+
+let score =
+    Number(localStorage.getItem("q1Score") || 0) +
+    Number(localStorage.getItem("q2Score") || 0) +
+    Number(localStorage.getItem("q3Score") || 0) +
+    Number(localStorage.getItem("q4Score") || 0) +
+    Number(localStorage.getItem("q5Score") || 0);
+
+const percentage = (score / 5) * 100;
+
+const resultTitle = document.getElementById("resultTitle");
+const scoreValue = document.getElementById("scoreValue");
+const resultMessage = document.getElementById("resultMessage");
+const resultBtn = document.getElementById("resultBtn");
+
+scoreValue.innerText = percentage + "%";
+
+if(percentage >= 80){
+
+    resultTitle.innerText = "GREAT WORK";
+
+    scoreValue.classList.add("pass-score");
+
+    resultMessage.innerHTML =
+        "Well done!<br>You successfully passed this quiz.";
+
+    resultBtn.innerText = "Print Gate Pass";
+
+    resultBtn.addEventListener("click", () => {
+
+        window.location.href = "pass.html";
+
+    });
+
+}
+else{
+
+    resultTitle.innerText = "NEEDS IMPROVEMENT";
+
+    scoreValue.classList.add("fail-score");
+
+    resultMessage.innerHTML =
+        "Unfortunately, you did not pass this quiz.";
+
+    resultBtn.innerText = "Try Again";
+
+    resultBtn.addEventListener("click", () => {
+
+        localStorage.removeItem("q1Answer");
+        localStorage.removeItem("q2Answer");
+        localStorage.removeItem("q3Answer");
+        localStorage.removeItem("q4Answer");
+        localStorage.removeItem("q5Answer");
+
+        window.location.href = "q1.html";
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>

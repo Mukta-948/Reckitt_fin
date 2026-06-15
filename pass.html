@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gate Pass</title>
+
+    <link rel="stylesheet" href="css/pass.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="pass-card">
+
+        <!-- Logo -->
+        <img src="assets/logo.png" alt="Reckitt Logo" class="logo result-logo">
+
+        <!-- Title -->
+        <h2 class="gate-pass-title">Gate Pass</h2>
+
+        <!-- Employee Information -->
+        <div class="employee-details">
+
+    <h1 class="employee-name" id="passName">
+        Loading...
+    </h1>
+
+    <h3 class="designation" id="passDesignation">
+        Loading...
+    </h3>
+
+    <h3 class="contact" id="passContact">
+        Loading...
+    </h3>
+
+</div>
+
+        <!-- QR Code -->
+        <div class="qr-code">
+            <img src="assets/qr-code.png" alt="QR Code">
+        </div>
+
+        <!-- Bottom Watermark -->
+        <img src="assets/watermark.png" alt="" class="watermark">
+
+    </div>
+    <button id="printBtn" class="print-btn">
+    Print Gate Pass
+</button>
+    <script>
+
+document.getElementById("passName").innerText =
+    localStorage.getItem("visitorName") || "Visitor";
+
+document.getElementById("passDesignation").innerText =
+    localStorage.getItem("visitorDesignation") || "";
+
+document.getElementById("passContact").innerText =
+    localStorage.getItem("visitorMobile") || "";
+    document.getElementById("printBtn").addEventListener("click", () => {
+    window.print();
+});
+
+</script>
+
+</body>
+</html>
