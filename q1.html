@@ -32,18 +32,22 @@
     <div class="options-grid">
 
         <button class="option" data-correct="false">
+    <span class="option-letter">A</span>
     <span class="option-text">Safety Shoes</span>
 </button>
 
 <button class="option" data-correct="true">
+    <span class="option-letter">B</span>
     <span class="option-text">Helmet</span>
 </button>
 
 <button class="option" data-correct="false">
+    <span class="option-letter">C</span>
     <span class="option-text">Gloves</span>
 </button>
 
 <button class="option" data-correct="false">
+    <span class="option-letter">D</span>
     <span class="option-text">Goggles</span>
 </button>
 
@@ -51,7 +55,7 @@
 
     <div class="button-row">
 
-        <button class="prev-btn" disabled>
+        <button class="prev-btn" id="prevBtn">
             Previous
         </button>
 
@@ -137,6 +141,13 @@ options.forEach(option => {
 nextBtn.addEventListener("click", () => {
     window.location.href = "q2.html";
 });
+const prevBtn = document.getElementById("prevBtn");
+
+prevBtn.addEventListener("click", () => {
+    window.location.href = "video.html";
+});
+
+
 </script>
 </body>
 </html>

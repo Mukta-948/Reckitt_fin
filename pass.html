@@ -10,6 +10,9 @@
 </head>
 
 <body>
+<div class="page-content">
+
+   
 
     <div class="pass-card">
 
@@ -38,8 +41,8 @@
 
         <!-- QR Code -->
         <div class="qr-code">
-            <img src="assets/qr-code.png" alt="QR Code">
-        </div>
+    <img id="qrCode" alt="QR Code">
+</div>
 
         <!-- Bottom Watermark -->
         <img src="assets/watermark.png" alt="" class="watermark">
@@ -48,17 +51,40 @@
     <button id="printBtn" class="print-btn">
     Print Gate Pass
 </button>
-    <script>
+</div>
+ <script>
 
-document.getElementById("passName").innerText =
+const visitorName =
     localStorage.getItem("visitorName") || "Visitor";
 
-document.getElementById("passDesignation").innerText =
+const visitorDesignation =
     localStorage.getItem("visitorDesignation") || "";
 
-document.getElementById("passContact").innerText =
+const visitorMobile =
     localStorage.getItem("visitorMobile") || "";
-    document.getElementById("printBtn").addEventListener("click", () => {
+
+document.getElementById("passName").innerText =
+    visitorName;
+
+document.getElementById("passDesignation").innerText =
+    visitorDesignation;
+
+document.getElementById("passContact").innerText =
+    visitorMobile;
+
+/* Dynamic QR */
+
+const qrData =
+`Name: ${visitorName}
+Designation: ${visitorDesignation}
+Mobile: ${visitorMobile}`;
+
+document.getElementById("qrCode").src =
+`https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(qrData)}`;
+
+/* Print */
+
+document.getElementById("printBtn").addEventListener("click", () => {
     window.print();
 });
 

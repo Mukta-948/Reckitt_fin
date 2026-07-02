@@ -89,14 +89,44 @@ body{
     margin-top:45px;
     width:311px;
     height:66px;
+
     border:none;
     border-radius:10px;
-    background:#FF008A;
+
+    background:linear-gradient(
+        90deg,
+        #9E0054 0%,
+        #C70068 35%,
+        #E5007A 70%,
+        #FF1A8C 100%
+    );
+
     color:#fff;
     font-size:18px;
     font-weight:700;
+
     cursor:pointer;
+    transition:all .3s ease;
+
+    box-shadow:0 6px 16px rgba(255,0,127,.30);
     z-index:1;
+}
+
+.result-btn:hover{
+    background:linear-gradient(
+        90deg,
+        #8C004B 0%,
+        #B90062 35%,
+        #D90074 70%,
+        #FF2A96 100%
+    );
+
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(255,0,127,.40);
+}
+
+.result-btn:active{
+    transform:translateY(0);
 }
 
 .watermark{

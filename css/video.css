@@ -48,34 +48,63 @@ body{
     max-width:460px;
     height:66px;
     margin:35px auto 0;
+
     border:none;
     border-radius:10px;
-    background:#cccccc;
+
+    /* Disabled state */
+    background:linear-gradient(
+        90deg,
+        #F4B4D0 0%,
+        #F8C5DC 100%
+    );
+
     color:#ffffff;
     font-size:32px;
     font-weight:600;
+
     cursor:not-allowed;
-    transition:0.3s;
+    transition:all .3s ease;
+
+    box-shadow:0 5px 15px rgba(255,0,127,.15);
 }
 
 .continue-btn.enabled{
     background:linear-gradient(
         90deg,
-        #e4007f,
-        #ff008c
+        #9E0054 0%,
+        #C70068 30%,
+        #E5007A 65%,
+        #FF1A8C 100%
     );
+
     cursor:pointer;
+    box-shadow:0 6px 18px rgba(255,0,127,.35);
+}
+
+.continue-btn.enabled:hover{
+    background:linear-gradient(
+        90deg,
+        #8C004B 0%,
+        #B90062 30%,
+        #DB0076 65%,
+        #FF2A96 100%
+    );
+
+    transform:translateY(-2px);
+}
+
+.continue-btn.enabled:active{
+    transform:translateY(0);
 }
 
 .watermark{
     position:absolute;
-    bottom:-20px;
-    left:-14px;
-    width:136px;
-    opacity:0.06;
-    pointer-events:none;
+    left:0px;
+    bottom:0px;
+    width:100px;
+    opacity:.06;
 }
-
 @media(max-width:768px){
 
     .video-card{

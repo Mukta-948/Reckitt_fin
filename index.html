@@ -199,34 +199,66 @@ emailInput.addEventListener("input", function() {
 
 
 // FORM SUBMIT
-form.addEventListener("submit", function(e) {
+form.addEventListener("submit", async function(e) {
 
     e.preventDefault();
 
-    localStorage.setItem(
-        "visitorName",
-        nameInput.value.trim()
-    );
+    const visitorData = {
+        users: [{
+            name: nameInput.value.trim(),
+            designation: designationInput.value.trim(),
+            contact: mobileInput.value.trim(),
+            email: emailInput.value.trim()
+        }]
+    };
 
-    localStorage.setItem(
-        "visitorDesignation",
-        designationInput.value.trim()
-    );
+    try {
 
-    localStorage.setItem(
-        "visitorMobile",
-        mobileInput.value.trim()
-    );
+        const response = await fetch(
+            "https://serve.faux-api.com/22be078d2c735d3820e14132/reckittdata",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(visitorData)
+            }
+        );
 
-    localStorage.setItem(
-        "visitorEmail",
-        emailInput.value.trim()
-    );
+        const result = await response.json();
 
-    window.location.href = "video.html";
+        console.log("API Response:", result);
+
+        localStorage.setItem(
+            "visitorName",
+            nameInput.value.trim()
+        );
+
+        localStorage.setItem(
+            "visitorDesignation",
+            designationInput.value.trim()
+        );
+
+        localStorage.setItem(
+            "visitorMobile",
+            mobileInput.value.trim()
+        );
+
+        localStorage.setItem(
+            "visitorEmail",
+            emailInput.value.trim()
+        );
+
+        window.location.href = "video.html";
+
+    } catch(error) {
+
+        console.error("API Error:", error);
+        alert("Unable to save visitor data.");
+
+    }
 
 });
-
 </script>
 
 </body>

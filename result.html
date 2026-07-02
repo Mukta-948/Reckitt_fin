@@ -42,7 +42,6 @@
 </div>
 
 <script>
-
 let score =
     Number(localStorage.getItem("q1Score") || 0) +
     Number(localStorage.getItem("q2Score") || 0) +
@@ -59,7 +58,43 @@ const resultBtn = document.getElementById("resultBtn");
 
 scoreValue.innerText = percentage + "%";
 
-if(percentage >= 80){
+
+// SAVE RESULT TO API
+const assessmentData = {
+    users: [{
+        name: localStorage.getItem("visitorName"),
+        designation: localStorage.getItem("visitorDesignation"),
+        contact: localStorage.getItem("visitorMobile"),
+        email: localStorage.getItem("visitorEmail")
+    }],
+    results: [{
+        score: score,
+        percentage: percentage,
+        status: percentage >= 80 ? "PASS" : "FAIL",
+        completedOn: new Date().toLocaleString()
+    }]
+};
+
+fetch(
+    "https://serve.faux-api.com/22be078d2c735d3820e14132/reckittdata",
+    {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(assessmentData)
+    }
+)
+.then(response => response.json())
+.then(data => {
+    //console.log("Assessment Saved:", data);
+})
+.catch(error => {
+    console.error("API Error:", error);
+});
+
+
+if (percentage >= 80) {
 
     resultTitle.innerText = "GREAT WORK";
 
@@ -77,7 +112,7 @@ if(percentage >= 80){
     });
 
 }
-else{
+else {
 
     resultTitle.innerText = "NEEDS IMPROVEMENT";
 
