@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reckitt Horse Viewer</title>
+
+    <link rel="stylesheet" href="css/video.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="video-card">
+
+        <img src="assets/logo.png" alt="Reckitt Logo" class="logo">
+
+        <div class="model-viewer-card">
+            <div id="horseViewer" class="horse-viewer" aria-label="Interactive horse model"></div>
+
+            <div class="model-toolbar" aria-label="Horse model controls">
+                <button type="button" id="modelZoomIn" class="model-control-btn zoom-control">+</button>
+                <button type="button" id="modelZoomOut" class="model-control-btn zoom-control">-</button>
+                <button type="button" id="modelReset" class="model-control-btn gradient-control">Reset</button>
+                <button type="button" id="modelPlayPause" class="model-control-btn gradient-control" disabled>
+                    Pause
+                </button>
+            </div>
+
+            <p id="modelStatus" class="model-status">Loading 3D model...</p>
+        </div>
+
+        <button id="continueBtn" class="continue-btn enabled">
+            Continue
+        </button>
+
+        <img src="assets/watermark.png" alt="" class="watermark">
+
+    </div>
+
+<script>
+document.getElementById("continueBtn").addEventListener("click", () => {
+    window.location.href = "q1.html";
+});
+</script>
+
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://unpkg.com/three@0.165.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.165.0/examples/jsm/"
+    }
+}
+</script>
+<script type="module" src="js/horse-viewer.js"></script>
+
+</body>
+</html>
